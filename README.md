@@ -1,4 +1,9 @@
 # Automata-Synchronization
+  
+  
+  Este implementat un program ce primeste reprezentarea unui automat si geseste
+  secventele de sincronizare   
+  
 
 ### 1. Task1 - Accesible
 -------------------------  
