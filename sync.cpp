@@ -11,7 +11,7 @@ struct Pair
 {
     int s1; // prima stare
     int s2; // a doua stare
-    std::vector<int> seq; // retine tranzitia care a dus spre cele 2 noduri
+    std::vector<int> seq; // retine tranzitia care a dus spre cele 2 stari
 };
 
 using namespace std;
@@ -164,11 +164,18 @@ void task3(int n, vector<int> adj[], vector<int> initialStates, int finalStates[
     }
 }
 
+
 /**
- * @brief determina cuvantul de sincronizare a automatului
+ * @brief determina secventa de sincronizare a automatului
  * 
- * @param n numarul de stari ale automatuluiS
- * @param m numarul de simboluri pe care se fac tranzitii
+ * Pentru a determina secventa de sincronizare se porneste o parcurgere BFS din 2 stari diferite.
+ * Cele 2 stari sunt luate din multimea X, multime ce contine starile la care se ajung prin aplicarea
+ * tranzitiilor determinate.
+ * Daca in timpul parcurgerii cele 2 noduri ajung in acelasi nod, atunci s-a gasit o secventa de sincornizare.
+ * Pentru fiecare stare din multimea X, se aplica secventa gasita si se salveaza starile finale.
+ * 
+ * @param n numarul de stari ale automatului
+ * @param m numarul de simboluri pe care se fac tranzitiile
  * @param adj lista de adiacenta automat
  */
 void task4(int n, int m, vector<int> adj[]) {
@@ -213,9 +220,11 @@ void task4(int n, int m, vector<int> adj[]) {
                 if (nextS1 == nextS2) {
 
                     // s-a gasit secventa care duc cele 2 noduri in aceeasi stare
+                    
                     foundSeq = pair.seq;
                     foundSeq.push_back(i);
                     break;
+                
                 } else {
 
                     // se adauga starile cu tranzitia ce duc spre ele
@@ -253,7 +262,7 @@ void task4(int n, int m, vector<int> adj[]) {
             finalSeq.push_back(sym);
         }
 
-        // se actualizeaza multimea X cu starile finale determinate de tranzitia gasita
+        // se decrementeaza multimea X, avand doar starile finale determinate de tranzitia gasita
         X.clear();
         size = 0;
 
